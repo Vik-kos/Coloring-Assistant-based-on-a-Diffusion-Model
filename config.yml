@@ -1,0 +1,45 @@
+pretrained_model_path : None
+
+
+dataset_size : 14224
+img_size_param : 128
+
+alt_params:
+  batch_size: 4
+  learning_rate: 0.00001
+  optimizer_name: "AdamW"
+  noise_steps: 1000
+  sampling_steps: 25
+  max_noise_steps_sampling: 999
+  accumulate_grad_batches: 1
+
+#higher every_n_samples_loss results in a higher loss but a lower training time
+every_n_samples_loss : 1
+
+# parameter to enable optuna suggesting
+optuna_suggest:
+  batch_size_suggest: false
+  lr_suggest: false
+  accumulate_grad_batches_suggest: false
+  optimizer_suggest: false
+  noise_steps_suggest: false
+  sampling_steps_suggest: false
+  max_noise_steps_sampling_suggest: false
+
+
+project_name : "DDPM-Model-Pretraining-128-Face"
+
+dataset_name : "AnimeSketchColorizationPair"
+animesketchcolorizationpair_train : "./dataset/animeface/train"
+animesketchcolorizationpair_test : "./dataset/animeface/val"
+
+# training_mode : "DDPM-load_from_checkpoint"
+training_mode : "DDPM"
+# training_mode : "DDPM-Finetuning-load_from_checkpoint"
+# training_mode : "DDPM-Finetuning"
+
+test_params:
+  test_mode: True
+  limit_train_batches: 64
+  limit_val_batches: 64
+  limit_test_batches: 64
